@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="グリーンバック画像に好きな背景画像を合成するツール" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    
+
+    <main id="top">
+
+      <section class="workspace" aria-label="画像合成ワークスペース">
+        <aside class="sidebar">
+          <div class="step-heading"><span class="step-number">01</span><div><h2>素材を選択</h2><p>画像をアップロードしてください</p></div></div>
+          <div class="upload-stack">
+            <div class="upload-card" id="foregroundCard">
+              <input type="file" id="foregroundInput" accept="image/*" hidden />
+              <div class="upload-icon person-icon"><span></span></div>
+              <div class="upload-text"><strong>グリーンバック画像</strong><small id="foregroundName">人物や物の画像</small></div>
+              <button class="browse-btn" type="button" data-input="foregroundInput">選択</button>
+            </div>
+            <div class="upload-card" id="backgroundCard">
+              <input type="file" id="backgroundInput" accept="image/*" hidden />
+              <div class="upload-icon landscape-icon"><span></span></div>
+              <div class="upload-text"><strong>合成する背景</strong><small id="backgroundName">好きな画像を選択</small></div>
+              <button class="browse-btn" type="button" data-input="backgroundInput">選択</button>
+            </div>
+          </div>
+
+          <div class="settings-block">
+            <div class="setting-title"><span>調整</span><span class="optional">任意</span></div>
+            <label class="range-label" for="tolerance">色の許容範囲 <output id="toleranceValue">42</output></label>
+            <input id="tolerance" type="range" min="5" max="100" value="42" />
+            <p class="range-help">背景色の近さを調整します</p>
+            <label class="range-label" for="softness">境界のなめらかさ <output id="softnessValue">12</output></label>
+            <input id="softness" type="range" min="0" max="40" value="12" />
+          </div>
+          <button class="reset-btn" id="resetBtn" type="button">設定をリセット</button>
+        </aside>
+
+        <section class="preview-area">
+          <div class="preview-head"><div><p class="section-kicker">PREVIEW</p><h2>仕上がりを確認</h2></div><span class="image-size" id="imageSize">— × — px</span></div>
+          <div class="canvas-wrap empty" id="canvasWrap">
+            <div class="empty-state" id="emptyState"><div class="empty-art"><span class="sun"></span><span class="mountain one"></span><span class="mountain two"></span></div><strong>画像を選択すると<br />ここにプレビューが表示されます</strong><small>まずは左側から画像を追加してください</small></div>
+            <canvas id="canvas" aria-label="合成後のプレビュー"></canvas>
+            <div class="canvas-badge" id="canvasBadge">LIVE PREVIEW</div>
+          </div>
+          <div class="preview-footer"><p><span class="mini-lock">⌁</span> 画像はこのブラウザ内でのみ処理されます</p><button class="download-btn" id="downloadBtn" type="button" disabled><span>↓</span> 画像をダウンロード</button></div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
